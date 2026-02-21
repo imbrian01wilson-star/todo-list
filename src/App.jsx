@@ -3,7 +3,7 @@ import "./App.css";
 import Items from "./items";
 
 function App() {
-  const [work, setWork] = useState([{ id: 1, title: "hello" }]);
+  const [work, setWork] = useState([{ id: 1, title: "hello", done: false }]);
   const [todo, setTodo] = useState("");
 
   const addBtn = () => {
@@ -13,7 +13,10 @@ function App() {
       alert("it already added!");
       setTodo("");
     } else {
-      setWork([...work, { id: Date.now(), title: todo.toLowerCase().trim() }]);
+      setWork([
+        ...work,
+        { id: Date.now(), title: todo.toLowerCase().trim(), done: false },
+      ]);
       setTodo("");
     }
   };
@@ -38,14 +41,11 @@ function App() {
 
         {work.map((c) => (
           <Items
-            key={Math.random()}
+            key={c.id}
             work={work}
             setWork={setWork}
-            todo={todo}
             setTodo={setTodo}
-          >
-            {c}
-          </Items>
+          >{c}</Items>
         ))}
       </div>
     </>

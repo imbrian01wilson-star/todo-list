@@ -9,9 +9,9 @@
   margin-top: 10px;
 }
 
-.trash-edit {
+.items-item {
   display: flex;
-  gap: 0.7rem;
+  gap: 0.5rem;
 }
 
 .trash {
@@ -44,4 +44,8 @@
 
 .edit:hover {
   background-color: rgba(52, 50, 156, 0.493);
+}
+
+.checked{
+    text-decoration: line-through;
 }
