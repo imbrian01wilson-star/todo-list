@@ -3,19 +3,19 @@ import "./App.css";
 import Items from "./items";
 
 function App() {
-  const [work, setWork] = useState(["hello"]);
+  const [work, setWork] = useState([{ id: 1, title: "hello" }]);
   const [todo, setTodo] = useState("");
 
   const addBtn = () => {
-    if (todo === "") {
+    if (todo.trim() === "") {
       alert("it cant be empty!");
-    } else if (work.includes(todo)) {
+    } else if (work.some((i) => i.title === todo.toLowerCase().trim())) {
       alert("it already added!");
+      setTodo("");
     } else {
-      setWork([...work, todo]);
+      setWork([...work, { id: Date.now(), title: todo.toLowerCase().trim() }]);
       setTodo("");
     }
-    
   };
 
   return (
@@ -23,9 +23,17 @@ function App() {
       <div className="box">
         <h2>To-Do List</h2>
 
-        <div>
-          <input type="text" value={todo} onChange={(e) => setTodo(e.target.value)} />
-          <button onClick={addBtn}>Add</button>
+        <div className="input-btn">
+          <input
+            className="input"
+            placeholder="Add some task"
+            type="text"
+            value={todo}
+            onChange={(e) => setTodo(e.target.value)}
+          />
+          <button className="btn" onClick={addBtn}>
+            Add
+          </button>
         </div>
 
         {work.map((c) => (
